@@ -23,7 +23,7 @@
           <div>Esc to exit - Enter to submit</div>
         </div>
         <div class="editTodoModalFooter">
-          <Btn class="editTodoSubmitBtn" @click="$emit('submit')">Submit</Btn>
+          <Btn variant="success" class="editTodoSubmitBtn" @click="$emit('submit')">Submit</Btn>
           <Btn variant="danger" @click="$emit('close')">Close</Btn>
         </div>
       </div>

@@ -44,17 +44,16 @@ import Todo from "./components/Todo.vue";
 import EditTodo from "./components/EditTodoForm.vue";
 import Spinner from "./components/Spinner.vue";
 import axios from "axios";
-import { ref, reactive } from "vue";
+import { ref, reactive, watch } from "vue";
+import { useFetch } from "./composables/fetch";
 
 const todoTitle = ref("");
-const todos = ref([]);
 const alert = reactive({
   show: false,
   message: "",
   variant: "",
 });
 const showEditTodoModal = ref(false);
-const isLoading = ref(false);
 const buttonLoading = ref(false);
 const editTodoForm = reactive({
   show: false,
@@ -64,7 +63,11 @@ const editTodoForm = reactive({
   },
 });
 
-fetchTodo();
+const { data: todos, isLoading } = useFetch("/api/todos", {
+  onError: () => {
+    showAlert("Failed loading todos");
+  },
+});
 
 function showEditTodoForm(todo) {
   editTodoForm.show = true;
