@@ -35,16 +35,7 @@
 import Modal from "./Modal.vue";
 import Btn from "./Btn.vue";
 
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: true,
-  },
-  show: {
-    type: Boolean,
-    required: true,
-  },
-});
+const props = defineProps(["show", "modelValue"]);
 
 const emit = defineEmits(["submit", "close", "update:modelValue"]);
 </script>
