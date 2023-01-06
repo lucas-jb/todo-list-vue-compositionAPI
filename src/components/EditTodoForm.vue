@@ -1,9 +1,5 @@
 <template>
-  <Modal
-    :show="show"
-    @close="$emit('close')"
-    @submit="$emit('submit')"
-  >
+  <Modal :show="show" @close="$emit('close')" @submit="$emit('submit')">
     <template #header>
       <h2>Edit Todo</h2>
     </template>
@@ -34,21 +30,25 @@
     </template>
   </Modal>
 </template>
-<script>
+
+<script setup>
 import Modal from "./Modal.vue";
 import Btn from "./Btn.vue";
 
-export default {
-  components: {
-    Modal,
-    Btn,
+const props = defineProps({
+  modelValue: {
+    type: String,
+    required: true,
   },
+  show: {
+    type: Boolean,
+    required: true,
+  },
+});
 
-  props: ["modelValue", "show"],
-
-  emits: ["submit", "close", "update:modelValue"],
-};
+const emit = defineEmits(["submit", "close", "update:modelValue"]);
 </script>
+
 <style scoped>
 .editTodoForm > input {
   width: 100%;
