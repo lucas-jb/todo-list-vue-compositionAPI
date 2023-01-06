@@ -10,33 +10,18 @@
 
 <script setup>
 import { computed } from "vue";
+import { useBackgroundColor, backgroundColorProps } from "../composables/backgroundColor";
 
 const props = defineProps({
-  variant: {
-    type: String,
-    required: false,
-    default: "success",
-    validator(value) {
-      return ["success", "danger", "warning", "info"].includes(value);
-    },
-  },
   circle: {
     type: Boolean,
     required: false,
     default: false,
   },
+  ...backgroundColorProps,
 });
 
-const backgroundColor = computed(() => {
-  const options = {
-    success: "var(--accent-color)",
-    danger: "var(--danger-color)",
-    warning: "var(--warning-color)",
-    info: "var(--info-color)",
-  };
-
-  return options[props.variant];
-});
+const backgroundColor = useBackgroundColor(props);
 
 const applyCircleClass = computed(() => props.circle);
 

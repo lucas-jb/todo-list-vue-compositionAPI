@@ -6,6 +6,7 @@
         :disabled="isLoading"
         class="btn"
         @click="submitTodo"
+        variant="success"
       >
         <Spinner v-if="isLoading"></Spinner>
         <span v-else>Add Todo</span>

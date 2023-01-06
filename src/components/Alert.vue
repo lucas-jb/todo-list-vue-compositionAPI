@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
 import Btn from "./Btn.vue";
+import { useBackgroundColor, backgroundColorProps } from "../composables/backgroundColor";
 const props = defineProps({
   message: {
     type: String,
@@ -17,27 +17,12 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
-  variant: {
-    type: String,
-    required: false,
-    default: "danger",
-    validator(value) {
-      return ["danger", "warning", "info"].includes(value);
-    },
-  },
+  ...backgroundColorProps,
 });
 
 const emit = defineEmits(["close"]);
 
-const backgroundColor = computed(() => {
-  const options = {
-    danger: "var(--danger-color)",
-    warning: "var(--warning-color)",
-    info: "var(--info-color)",
-  };
-
-  return options[props.variant];
-});
+const backgroundColor = useBackgroundColor(props);
 
 function close() {
   emit("close");
