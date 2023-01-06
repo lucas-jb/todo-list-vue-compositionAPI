@@ -8,40 +8,39 @@
   </button>
 </template>
 
-<script>
-export default {
-  props: {
-    variant: {
-      type: String,
-      required: false,
-      default: "success",
-      validator(value) {
-        return ["success", "danger", "warning", "info"].includes(value);
-      },
-    },
-    circle: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-  },
-  computed: {
-    backgroundColor() {
-      const options = {
-        success: "var(--accent-color)",
-        danger: "var(--danger-color)",
-        warning: "var(--warning-color)",
-        info: "var(--info-color)",
-      };
+<script setup>
+import { computed } from "vue";
 
-      return options[this.variant];
-    },
-    applyCircleClass() {
-      return this.circle;
+const props = defineProps({
+  variant: {
+    type: String,
+    required: false,
+    default: "success",
+    validator(value) {
+      return ["success", "danger", "warning", "info"].includes(value);
     },
   },
-  emits: ["click"],
-};
+  circle: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+});
+
+const backgroundColor = computed(() => {
+  const options = {
+    success: "var(--accent-color)",
+    danger: "var(--danger-color)",
+    warning: "var(--warning-color)",
+    info: "var(--info-color)",
+  };
+
+  return options[props.variant];
+});
+
+const applyCircleClass = computed(() => props.circle);
+
+const emit = defineEmits(["click"]);
 </script>
 
 <style scoped>
