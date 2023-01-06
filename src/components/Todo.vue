@@ -12,24 +12,19 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Btn from "./Btn.vue";
 import Pencil from "./icons/Pencil.vue";
 import Bin from "./icons/Bin.vue";
-export default {
-  components: {
-    Btn,
-    Pencil,
-    Bin,
+
+const props = defineProps({
+  title: {
+    type: String,
+    required: true,
   },
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
-  emits: ["remove", "edit"],
-};
+});
+const emit = defineEmits(["remove", "edit"]);
+
 </script>
 
 <style scoped>
