@@ -53,7 +53,6 @@ const alert = reactive({
   message: "",
   variant: "",
 });
-const showEditTodoModal = ref(false);
 const buttonLoading = ref(false);
 const editTodoForm = reactive({
   show: false,
@@ -80,16 +79,7 @@ function showAlert(message, variant = "danger") {
   alert.variant = variant;
 }
 
-async function fetchTodo() {
-  isLoading.value = true;
-  try {
-    const res = await axios.get("api/todos");
-    todos.value = await res.data;
-  } catch {
-    showAlert("There was a problem loading todos");
-  }
-  isLoading.value = false;
-}
+
 
 async function addTodo(title) {
   buttonLoading.value = true;
@@ -112,6 +102,13 @@ async function updateTodo() {
     await axios.put(`api/todos/${editTodoForm.todo.id}`, {
       title: editTodoForm.todo.title,
     });
+    
+    const todo = todos.value.find(
+      (todo) => todo.id === editTodoForm.todo.id
+    );
+
+    todo.title = editTodoForm.todo.title;
+
   } catch {
     showAlert.value("There was a problem updating todo");
   }

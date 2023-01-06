@@ -1,5 +1,5 @@
 <template>
-  <Modal :show="show" @close="$emit('close')" @submit="$emit('submit')">
+  <Modal :show="show" @close="closeTodo" @submit="submitTodo">
     <template #header>
       <h2>Edit Todo</h2>
     </template>
@@ -12,7 +12,7 @@
         <input
           type="text"
           :value="modelValue"
-          @input="$emit('update:modelValue', $event.target.value)"
+          @input="updateModelValue($event.target.value)"
         />
       </form>
     </template>
@@ -23,8 +23,8 @@
           <div>Esc to exit - Enter to submit</div>
         </div>
         <div class="editTodoModalFooter">
-          <Btn variant="success" class="editTodoSubmitBtn" @click="$emit('submit')">Submit</Btn>
-          <Btn variant="danger" @click="$emit('close')">Close</Btn>
+          <Btn variant="success" class="editTodoSubmitBtn" @click="submitTodo">Submit</Btn>
+          <Btn variant="danger" @click="closeTodo">Close</Btn>
         </div>
       </div>
     </template>
@@ -38,6 +38,18 @@ import Btn from "./Btn.vue";
 const props = defineProps(["show", "modelValue"]);
 
 const emit = defineEmits(["submit", "close", "update:modelValue"]);
+
+const submitTodo = () => {
+  emit("submit");
+};
+
+const closeTodo = () => {
+  emit("close");
+};
+
+const updateModelValue = (value) => {
+  emit("update:modelValue", value);
+};
 </script>
 
 <style scoped>
