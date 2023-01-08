@@ -5,6 +5,8 @@ A todo-list app developed in Vue3 with the composite API
 This app is a refactor of this project made with the options API:
 https://github.com/lucas-jb/todo-list-vue-optionsAPI
 
+![Image text](https://lucasjuarez.com/assets/img/work/todolist.jpg)
+
 # todo-list-vue
 
 This template should help get you started developing with Vue 3 in Vite.
